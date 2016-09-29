@@ -16,7 +16,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        return "Estoy en el index";
     }
 
     /**
@@ -26,7 +26,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return "Esot seria el formulario para crear";
     }
 
     /**
