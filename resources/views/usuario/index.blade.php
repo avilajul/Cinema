@@ -1,16 +1,7 @@
 @extends('layouts.admin')
 
 <?php $message = Session::get('message') ?>
-@if(Session::has('message'))
-  <div class="alert alert-success alert-dismissiable">
-    <button type="button" class="close" data-dimiss="alert" aria-label="Close" name="button">
-      <span aria-hidden="true">
-         &times;
-      </span>
-    </button>
-    {{Session::get('message')}}
-  </div>
-@endif
+@include('alerts.success')
 
 @section('content')
   <table class="table">
@@ -29,4 +20,5 @@
       </tbody>
     @endforeach
   </table>
+  {!! $users->render() !!}
 @endsection

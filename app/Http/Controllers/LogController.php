@@ -3,28 +3,16 @@
 namespace Cinema\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-
-use Cinema\Http\Requests;
-use Cinema\Http\Requests\UserCreateRequest;
-use Cinema\Http\Requests\UserUpdateRequest;
-use Cinema\Http\Controllers\Controller;
-use Cinema\User;
+use Auth;
 use Session;
 use Redirect;
 
-class UsuarioController extends Controller
+use Cinema\Http\Requests;
+use Cinema\Http\Requests\LoginRequest;
+use Cinema\Http\Controllers\Controller;
+
+class LogController extends Controller
 {
-
-    public function __construct()
-    {
-         $this->beforeFilter('@find',['only' => ['edit','update','destroy']]);
-     }
-     public function find(Route $route)
-     {
-         $this->user = User::find($route->getParameter('usuario'));
-
-     }
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +20,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(2);
-        return view('usuario.index', compact('users'));
+        //
     }
 
     /**
@@ -43,7 +30,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuario.create');
+        //
     }
 
     /**
@@ -52,10 +39,20 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserCreateRequest $request)
+    public function store(LoginRequest $request)
     {
-        User::create($request->all() );
-        return redirect('/usuario')->with('message', 'store');
+        if(Auth::attempt(['email' =>$request['email'],'password' =>$request['password']]))
+        {
+          return Redirect::to('admin');
+        }
+        Session::flash('message-error', 'Datos son incorrecto');
+        return Redirect::to('/');
+    }
+
+    public function logout()
+    {
+      Auth::logout();
+      return Redirect::to('/');
     }
 
     /**
@@ -77,7 +74,7 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        return view('usuario.edit', ['user'=>$this->user]);
+        //
     }
 
     /**
@@ -87,14 +84,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-
-        $this->user->fill($request->all());
-        $this->user->save();
-
-        Session::flash('message', 'Usuario Editado Correctamente');
-        return Redirect::to('/usuario');
+        //
     }
 
     /**
@@ -105,9 +97,6 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $this->user->delete();
-
-        Session::flash('message', 'Usuario Eliminado Correctamente');
-        return Redirect::to('/usuario');
+        //
     }
 }
