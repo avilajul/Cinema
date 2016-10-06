@@ -3,30 +3,13 @@
 namespace Cinema\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 
 use Cinema\Http\Requests;
-use Cinema\Http\Requests\UserCreateRequest;
-use Cinema\Http\Requests\UserUpdateRequest;
 use Cinema\Http\Controllers\Controller;
-use Cinema\User;
-use Session;
-use Redirect;
+use Cinema\Genre;
 
-class UsuarioController extends Controller
+class GeneroController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('admin');
-        $this->beforeFilter('@find',['only' => ['edit','update','destroy']]);
-     }
-     public function find(Route $route)
-     {
-         $this->user = User::find($route->getParameter('usuario'));
-
-     }
     /**
      * Display a listing of the resource.
      *
@@ -34,8 +17,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(2);
-        return view('usuario.index', compact('users'));
+        return view('genero.index');
     }
 
     /**
@@ -45,7 +27,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuario.create');
+        return view('genero.create');
     }
 
     /**
@@ -54,11 +36,17 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserCreateRequest $request)
+    public function store(Request $request)
     {
-        User::create($request->all() );
-        return redirect('/usuario')->with('message', 'store');
-    }
+      if($request->ajax())
+      {
+          Genre::create($request->all());
+          return response()->json([
+          "mensaje" => "creado"
+          ]);
+        }
+      }
+
 
     /**
      * Display the specified resource.
@@ -79,7 +67,7 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        return view('usuario.edit', ['user'=>$this->user]);
+        //
     }
 
     /**
@@ -89,14 +77,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-
-        $this->user->fill($request->all());
-        $this->user->save();
-
-        Session::flash('message', 'Usuario Editado Correctamente');
-        return Redirect::to('/usuario');
+        //
     }
 
     /**
@@ -107,9 +90,6 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $this->user->delete();
-
-        Session::flash('message', 'Usuario Eliminado Correctamente');
-        return Redirect::to('/usuario');
+        //
     }
 }
