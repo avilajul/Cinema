@@ -10,14 +10,20 @@ use Cinema\Genre;
 
 class GeneroController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('genero.index');
+      if ($request->ajax())
+      {
+        $genres = Genre::all();
+        return response()->json($genres);
+      }
+      return view('genero.index');
     }
 
     /**
