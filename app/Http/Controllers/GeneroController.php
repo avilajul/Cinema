@@ -3,6 +3,7 @@
 namespace Cinema\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route; //optimización de codigo
 
 use Cinema\Http\Requests;
 use Cinema\Http\Controllers\Controller;
@@ -10,6 +11,15 @@ use Cinema\Genre;
 
 class GeneroController extends Controller
 {
+  public function __construct()
+  {
+    $this->beforeFilter('@find',['only' => ['edit', 'update','destroy']]);
+  }
+
+  public function find(Route $route)
+  {
+    $this->genre = Genre::find($route->getParameter('genero'));
+  }
 
     /**
      * Display a listing of the resource.
@@ -100,6 +110,7 @@ class GeneroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->genre->delete();
+        return response()->json(["mensaje"=>"borrado"]);
     }
 }
