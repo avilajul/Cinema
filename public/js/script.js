@@ -1,7 +1,7 @@
 //jquery
 $("#registro").click(function(){
 	var dato = $("#genre").val();
-	var route = "/genero";
+	var route = "http://localhost:8000/genero";
 	var token = $("#token").val();
 
 	$.ajax({

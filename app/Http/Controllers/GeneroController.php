@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route; //optimización de codigo
 
 use Cinema\Http\Requests;
+use Cinema\Http\Requests\GenreRequest;
 use Cinema\Http\Controllers\Controller;
 use Cinema\Genre;
 
@@ -52,7 +53,7 @@ class GeneroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GenreRequest $request)
     {
       if($request->ajax())
       {
