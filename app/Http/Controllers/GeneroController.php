@@ -71,9 +71,10 @@ class GeneroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $genre =Genre::find($id);
+        return response()->json($genre);
     }
 
     /**
@@ -85,7 +86,10 @@ class GeneroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $genre =Genre::find($id);
+      $genre->fill($request->all());
+      $genre->save();
+      return response()->json(["mensaje"=>"listo"]);
     }
 
     /**
