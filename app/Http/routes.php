@@ -19,6 +19,7 @@ Route::get('admin', 'FrontController@admin');
 Route::resource('usuario', 'UsuarioController');
 Route::resource('genero', 'GeneroController');
 Route::get('genero', 'GeneroController@index');
+Route::resource('pelicula', 'MovieController');
 
 Route::resource('log', 'LogController');
 Route::get('logout', 'LogController@logout');
