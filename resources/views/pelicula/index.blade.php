@@ -15,7 +15,9 @@
           <td>{{$movie->genre}}</td>
           <td>{{$movie->direction}}</td>
           <td><img src="movies/{{$movie->path}}" alt="" style="width:100px;" /></td>
-          <td>Editar</td>
+          <td>
+            {!!link_to_route('pelicula.edit', $title = 'Editar', $parameters = $movie->genre_id, $attributes = ['class'=>'btn btn-primary'])!!}
+          </td>
         </tbody>
       @endforeach
     </table>
