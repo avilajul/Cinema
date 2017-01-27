@@ -5,6 +5,8 @@ namespace Cinema\Http\Controllers\Auth;
 use Cinema\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+use Auth;
+
 class PasswordController extends Controller
 {
     /*
@@ -25,6 +27,15 @@ class PasswordController extends Controller
      *
      * @return void
      */
+    protected $redirectTo ='/';
+
+    protected function resetPassword($user, $password)
+    {
+      $user->password = $password;
+      $user->save();
+      Auth::login($user);
+    }
+
     public function __construct()
     {
         $this->middleware('guest');
