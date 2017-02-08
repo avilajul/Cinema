@@ -1,24 +1,24 @@
 <div class="form-group">
-	{!!Form::label('nombre','Nombre:')!!}
+	{!!Form::label('Nombre')!!}
 	{!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Ingresa el Nombre de la pelicula'])!!}
 </div>
 <div class="form-group">
-	{!!Form::label('Elenco','Elenco:')!!}
+	{!!Form::label('Elenco:')!!}
 	{!!Form::text('cast',null,['class'=>'form-control', 'placeholder'=>'Ingresa el elenco'])!!}
 </div>
 <div class="form-group">
-	{!!Form::label('Direccion','Dirección:')!!}
+	{!!Form::label('Dirección:')!!}
 	{!!Form::text('direction',null,['class'=>'form-control', 'placeholder'=>'Ingresa al director'])!!}
 </div>
 <div class="form-group">
-	{!!Form::label('Duracion','Duración:')!!}
+	{!!Form::label('Duración:')!!}
 	{!!Form::text('duration',null,['class'=>'form-control', 'placeholder'=>'Ingresa la duración'])!!}
 </div>
 <div class="form-group">
-	{!!Form::label('Poster','Poster:')!!}
+	{!!Form::label('Poster:')!!}
 	{!!Form::file('path')!!}
 </div>
 <div class="form-group">
-	{!!Form::label('Genero','Genero:')!!}
+	{!!Form::label('Genero:')!!}
 	{!!Form::select('genre_id',$genres)!!}
 </div>

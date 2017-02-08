@@ -24,8 +24,10 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 Route::resource('mail', 'MailController');
 Route::resource('usuario', 'UsuarioController');
+
 Route::resource('genero', 'GeneroController');
 Route::get('genero', 'GeneroController@index');
+
 Route::resource('pelicula', 'MovieController');
 
 Route::resource('log', 'LogController');

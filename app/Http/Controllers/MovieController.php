@@ -62,7 +62,8 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         Movie::create($request->all());
-        return "Listo";
+        Session::flash('message','Pelicula Creada Correctamente');
+        return Redirect::To('/pelicula');
     }
 
     /**
@@ -95,7 +96,7 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $genre_id)
     {
         $this->movie->fill($request->all());
         $this->movie->save();

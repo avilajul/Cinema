@@ -9,7 +9,7 @@ use DB;
 class Movie extends Model
 {
     protected $table = "movies";
-    protected $fillable =['name', 'path','cast','direction','duraction','genre_id'];
+    protected $fillable =['name', 'path','cast','direction','duration','genre_id'];
 
     public function setPathAttribute($path)
     {
